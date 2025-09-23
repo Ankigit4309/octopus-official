@@ -40,10 +40,10 @@ const Dashboard = () => {
             Welcome back, {user?.firstName}! Here's what's happening at Octopus Technologies.
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <Building className="h-5 w-5 text-primary" />
           <span className="text-sm font-medium text-primary">Octopus Technologies</span>
-        </div>
+        </div> */}
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
