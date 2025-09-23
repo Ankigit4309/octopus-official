@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast'
 import { loginStart, loginSuccess } from '@/store/slices/authSlice'
 import logo from '@/assets/logo-light.png'
+import axios from 'axios'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -17,9 +19,9 @@ const Login = () => {
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!email || !password) {
       toast({
         variant: "destructive",
@@ -32,24 +34,33 @@ const Login = () => {
     setLoading(true)
     dispatch(loginStart())
 
-    // Simulate API call
-    setTimeout(() => {
-      const mockUser = {
-        id: '1',
-        firstName: 'John',
-        lastName: 'Doe',
-        email: email,
-        designation: 'HR Manager'
-      }
-      
-      dispatch(loginSuccess(mockUser))
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      }, {
+        // Add withCredentials if backend uses cookies for auth
+        // withCredentials: true 
+      });
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem("token", response.data.token);
+
+
+      dispatch(loginSuccess(response.data));
       toast({
         title: "Login Successful",
         description: "Welcome back to Octopus Technologies!",
-      })
-      navigate('/dashboard')
-      setLoading(false)
-    }, 1000)
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Login Failed",
+        description: error?.response?.data?.message || error.message || "Something went wrong.",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -64,7 +75,6 @@ const Login = () => {
           <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
           <p className="text-muted-foreground mt-2">Sign in to your account to continue</p>
         </div>
-
         <Card className="shadow-brand border-0 bg-gradient-card">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl text-center">Sign In</CardTitle>
