@@ -1,16 +1,15 @@
-# Welcome to your Lovable project
+# Welcome to Octopus official
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/270df1e5-4e6a-4e8a-84f8-6dfc361b5773
+
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/270df1e5-4e6a-4e8a-84f8-6dfc361b5773) and start prompting.
+Simply visit the and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
@@ -62,7 +61,7 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/270df1e5-4e6a-4e8a-84f8-6dfc361b5773) and click on Share -> Publish.
+Simply open and click on Share -> Publish.
 
 ## Can I connect a custom domain to my Lovable project?
 
@@ -70,4 +69,4 @@ Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Read more here: [Setting up a custom domain]
